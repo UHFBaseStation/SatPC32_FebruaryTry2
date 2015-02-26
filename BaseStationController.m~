@@ -49,7 +49,6 @@ enableButtons % buttons are disabled until dials are created
             datatable1{1,4} = llh(2);
             set(table1, 'Data',datatable1,'RowName',Sat);
           end
-          % To try and fix cables
           if Az > 180
               Az = 360 - Az;
               El = 180 - El;
