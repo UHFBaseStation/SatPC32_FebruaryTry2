@@ -11,6 +11,7 @@ disableButtons % buttons are disabled until dials are created
 downloadAndImportTLE
 setButtonNamesAndCallbackFunctions
 enableButtons % buttons are disabled until dials are created
+
 %% Main Function
 
   function startCallBack(source, eventdata)
@@ -826,7 +827,13 @@ enableButtons % buttons are disabled until dials are created
     set(satProgram,     'String', programSelection, 'Callback', @satelliteTrackingProgramCallback, 'Value',3);
     
     set(futureButton,   'String', 'Future',         'Callback', @getFutureDataset);
-    set(listBox,        'String', satNamesAll,      'Callback', @largeSatelliteListBox_Callback, 'Max', length(satNamesAll), 'Value',[1,8,9,45,107]);
+    satellite = {'ISS (ZARYA)','OSCAR 7','NO-44'};
+    Index = zeros(1,length(satellite));
+    for i = 1:length(satellite)
+        IndexC = strfind(satNamesAll, satellite{i});
+        Index(i) = find(not(cellfun('isempty', IndexC)));
+    end
+    set(listBox,        'String', satNamesAll,      'Callback', @largeSatelliteListBox_Callback, 'Max', length(satNamesAll), 'Value',Index);
     
     set(satPopUpMenu,   'String', {satNamesAll{get(listBox,'Value')}}, 'Enable', 'on');
     

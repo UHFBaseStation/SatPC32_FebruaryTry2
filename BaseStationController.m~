@@ -11,6 +11,10 @@ disableButtons % buttons are disabled until dials are created
 downloadAndImportTLE
 setButtonNamesAndCallbackFunctions
 enableButtons % buttons are disabled until dials are created
+<<<<<<< HEAD
+=======
+
+>>>>>>> FETCH_HEAD
 %% Main Function
 
   function startCallBack(source, eventdata)
@@ -38,8 +42,13 @@ enableButtons % buttons are disabled until dials are created
             getMultipleSatelliteCoordinates;
             satNumber = get(satPopUpMenu, 'Value');
             Sat = satPopUpList{satNumber};
+<<<<<<< HEAD
             Az = datatable1{satNumber,1};
             El = datatable1{satNumber,2};
+=======
+            Az = datatable1{1,satNumber};
+            El = datatable1{2,satNumber};
+>>>>>>> FETCH_HEAD
           else
             getSatelliteCoordinates;
             datatable1 = get(table1, 'Data');
@@ -49,10 +58,14 @@ enableButtons % buttons are disabled until dials are created
             datatable1{1,4} = llh(2);
             set(table1, 'Data',datatable1,'RowName',Sat);
           end
+<<<<<<< HEAD
           if Az > 180
               Az = 360 - Az;
               El = 180 - El;
           end
+=======
+          
+>>>>>>> FETCH_HEAD
           set(satName, 'String', Sat);
           sameAsLastSatellite = strcmp(Sat,lastSat);
           if sameAsLastSatellite || strcmp(lastSat, 'initial satellite')
@@ -825,7 +838,17 @@ enableButtons % buttons are disabled until dials are created
     set(satProgram,     'String', programSelection, 'Callback', @satelliteTrackingProgramCallback, 'Value',3);
     
     set(futureButton,   'String', 'Future',         'Callback', @getFutureDataset);
+<<<<<<< HEAD
     set(listBox,        'String', satNamesAll,      'Callback', @largeSatelliteListBox_Callback, 'Max', length(satNamesAll), 'Value',[1,8,9,45,107]);
+=======
+    satellite = {'ISS (ZARYA)','OSCAR 7','NO-44'};
+    Index = zeros(1,length(satellite))
+    for i = 1:length(satellite)
+        IndexC = strfind(satNamesAll, satellite{i});
+        Index(i) = find(not(cellfun('isempty', IndexC)));
+    end
+    set(listBox,        'String', satNamesAll,      'Callback', @largeSatelliteListBox_Callback, 'Max', length(satNamesAll), 'Value',Index);
+>>>>>>> FETCH_HEAD
     
     set(satPopUpMenu,   'String', {satNamesAll{get(listBox,'Value')}}, 'Enable', 'on');
     
